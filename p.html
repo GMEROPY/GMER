@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ekstra TI - Teknologi Informasi</title>
+    <link rel="stylesheet" href="p.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 data-animate>Welcome to <span class="highlight">Ekstra TI</span></h1>
+            <button id="theme-toggle" title="Toggle Theme">
+                <i class="fas fa-sun"></i>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <section class="container intro" data-animate>
+            <h2>Sambutan</h2>
+            <p>Teknologi Informasi (TI) atau Information Technology (IT) adalah penggunaan sistem komputer, perangkat lunak, jaringan, dan perangkat fisik lainnya untuk memproses, menyimpan, mengamankan, dan bertukar data elektronik.</p>
+        </section>
+
+        <section class="container components" data-animate>
+            <h2>Komponen Utama TI</h2>
+            <ul>
+                <li><i class="fas fa-server"></i> Perangkat Keras (Hardware): Komputer, server, jaringan fisik, perangkat mobile.</li>
+                <li><i class="fas fa-layer-group"></i> Perangkat Lunak (Software): Aplikasi, sistem operasi, perangkat lunak berbasis awan.</li>
+                <li><i class="fas fa-network-wired"></i> Jaringan & Penyimpanan: Router, switch, pusat data.</li>
+            </ul>
+        </section>
+
+        <section class="container functions" data-animate>
+            <h2>Fungsi dan Dampak TI</h2>
+            <ul>
+                <li><i class="fas fa-chart-line"></i> Bisnis: Mengotomatisasi proses, meningkatkan efisiensi.</li>
+                <li><i class="fas fa-shield-alt"></i> Keamanan: Melindungi data penting.</li>
+                <li><i class="fas fa-globe"></i> Komunikasi: Pertukaran data cepat via internet.</li>
+            </ul>
+            <p>Secara ringkas, TI adalah tulang punggung teknologi modern yang menghubungkan manusia dengan data melalui teknologi komputer.</p>
+        </section>
+
+        <section class="container story" data-animate>
+            <h3>Cerita Singkat</h3>
+            <p>Ini adalah cerita singkat tentang perjalanan Ekstra TI kami. Kami mulai dengan kelas dasar komputer dan berkembang menjadi komunitas inovator teknologi!</p>
+            <button class="cta-btn">Learn More <i class="fas fa-arrow-right"></i></button>
+        </section>
+    </main>
+
+    <footer class="container">
+        <p>&copy; 2024 Ekstra TI. Dibuat dengan <i class="fas fa-heart"></i></p>
+    </footer>
+
+    <script>
+        // Theme Toggle
+        const toggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+
+        // Load saved theme
+        if (localStorage.theme === 'dark' || (!localStorage.theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            html.classList.add('dark');
+            toggle.querySelector('i').className = 'fas fa-moon';
+        } else {
+            toggle.querySelector('i').className = 'fas fa-sun';
+        }
+
+        toggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+            const isDark = html.classList.contains('dark');
+            localStorage.theme = isDark ? 'dark' : 'light';
+            toggle.querySelector('i').className = isDark ? 'fas fa-moon' : 'fas fa-sun';
+        });
+
+        // Simple scroll animations trigger (Intersection Observer)
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        });
+
+        document.querySelectorAll('[data-animate]').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
